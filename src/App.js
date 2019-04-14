@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.module.css';
 import Person from './Person/Person';
 
 
@@ -27,14 +27,14 @@ class App extends Component {
     const person = {
       ...this.state.persons[personIndex]
     };
- 
+
     //const person = Object.assign({}, this.state.persons[personIndex]); // alternativa
 
     person.name = event.target.value;
-    
+
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    
+
     this.setState({ persons: persons }); //es mucho código, pero es la forma más eficiente
   };
 
@@ -64,10 +64,10 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person 
-              click={() => this.deletePersonHandler(index)} 
-              name={person.name} 
-              age={person.age} 
+            return <Person
+              click={() => this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age}
               key={person.id}
               changed={(event) => this.nameChangeHandler(event, person.id)}/>
           })}
@@ -79,18 +79,18 @@ class App extends Component {
             color: 'black'
       }
     }
-    const classes = [];
+    const assignedClasses = [];
     if(this.state.persons.length <= 2) {
-      classes.push('red'); //classes = ['red']
+      assignedClasses.push(classes.red);
     }
     if(this.state.persons.length <= 1) {
-      classes.push('bold'); //classes = ['red', 'bold']
+      assignedClasses.push(classes.bold);
     }
 
     return (
-        <div className="App">
+        <div className={classes.App}>
           <h1>React app</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
+          <p className={assignedClasses.join(' ')}>This is really working!</p>
           <button
             style={style}
             onClick={this.togglePersonsHandler}>Show persons</button>
