@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import classes from './App.module.css';
 import Person from './Person/Person';
 
-
 class App extends Component {
   state = {
     persons: [
@@ -18,23 +17,17 @@ class App extends Component {
   };
 
   nameChangeHandler = (event, id) => {
-
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
-
     //evitar mutar, por lo tanto se usa asi:
     const person = {
       ...this.state.persons[personIndex]
     };
-
     //const person = Object.assign({}, this.state.persons[personIndex]); // alternativa
-
     person.name = event.target.value;
-
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-
     this.setState({ persons: persons }); //es mucho código, pero es la forma más eficiente
   };
 
@@ -48,17 +41,8 @@ class App extends Component {
   };
 //es mejor usar bind :v mas rapido
   render()  {
-
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
     let persons = null;
+    let btnClass = '';
 
     if(this.state.showPersons) {
       persons = (
@@ -73,11 +57,8 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-            color: 'black'
-      }
+
+      btnClass = classes.Red;
     }
     const assignedClasses = [];
     if(this.state.persons.length <= 2) {
@@ -91,13 +72,11 @@ class App extends Component {
         <div className={classes.App}>
           <h1>React app</h1>
           <p className={assignedClasses.join(' ')}>This is really working!</p>
-          <button
-            style={style}
+          <button className={btnClass}
             onClick={this.togglePersonsHandler}>Show persons</button>
           {persons}
         </div>
     );
   }
 }
-
 export default App;

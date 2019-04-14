@@ -1,0 +1,23 @@
+.Person {
+    width: 500px;
+    margin: 16px auto;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 16px;
+    text-align: center;
+}
+
+@media (max-width: 550px) {
+    .Person {
+        width: 350px;
+    }
+}
+/*By the way, if you somehow also want to define a global (i.e. un-transformed)
+ CSS class in such a .css  file, you can prefix the selector with :global .
+
+Example:
+
+:global .Post { ... }
+
+Now you can use className="Post"  anywhere in your app and receive that styling.*/
+
