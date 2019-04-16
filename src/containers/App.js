@@ -6,13 +6,38 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-    state = {
-        persons: [
-            {id: 'asdsa', name: 'Oscar', age: 21},
-            {id: 'asdsa2', name: 'Pedro', age: 22},
-            {id: 'asdsa3', name: 'Ricky', age: 23}
-        ]
+
+    //LIFE CICLE HOOKS
+/*    Call super(props) (PASO 1)
+    Do: Set up state
+    Don't: Cause side-effects*/
+    constructor(props) {
+        super(props);
+        console.log('App.js constructor');
+        this.state = {
+            persons: [
+                {id: 'asdsa', name: 'Oscar', age: 21},
+                {id: 'asdsa2', name: 'Pedro', age: 22},
+                {id: 'asdsa3', name: 'Ricky', age: 23}
+            ]
+        };
     };
+
+/*    A partir de React 16.3
+    Cuando los props cambian, se puede hacer sync al state (PASO 2)
+    Dont: Cause side-effects*/
+    static getDerivedStateFromProps(props, state) {
+        console.log('App.js getDerivedStateFromProps', props);
+        return state;
+    }
+
+/*    Se ejecuta al final de haberse renderizado todo'
+    Paso 4
+    Do: Cause side-effects
+    Dont: update state (triggers re-render)*/
+    componentDidMount() {
+        console.log('App.js componentDidMount');
+    }
 
     togglePersonsHandler = () => {
         const doesShow = this.state.showPersons;
@@ -43,7 +68,11 @@ class App extends Component {
         this.setState({persons: persons});
     };
 //es mejor usar bind :v mas rapido
+
+    //PASO 3
     render()  {
+        console.log('App.js render');
+
         let persons = null;
 
         if(this.state.showPersons) {
