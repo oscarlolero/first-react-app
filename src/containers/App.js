@@ -31,14 +31,32 @@ class App extends Component {
         return state;
     }
 
-/*    Se ejecuta al final de haberse renderizado todo'
-    Paso 4
-    Do: Cause side-effects
-    Dont: update state (triggers re-render)*/
+    //May cancel updating process! (intermedio)
+    //Do:  Decide whether to continue or not
+    //Don't: Cause side-effects
+    //Se ejecuta después del getDerivedStateFromProps y antes del render()
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    // }
+
+    /*    Se ejecuta al final de haberse renderizado todo'
+        Paso 4
+        Do: Cause side-effects
+        Dont: update state (triggers re-render)*/
     componentDidMount() {
         console.log('App.js componentDidMount');
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log('app.js shouldComponentUpdate');
+        return true;
+    }
+
+    //Do: Cause side-effects
+    //Don't: update state (triggers re-render)
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('App.js componentDidUpdate');
+    }
+    
     togglePersonsHandler = () => {
         const doesShow = this.state.showPersons;
         this.setState({showPersons: !doesShow});
@@ -93,5 +111,11 @@ class App extends Component {
             </div>
         );
     }
+
+    //Do: last-minute DOM ops
+    //Don't: Cause side-effects
+    //Se ejecuta después del render > update child component props y antes de componentDidUpdate(), es muy raro su uso
+    // getSnapshotBeforeUpdate(prevProps, prevState) {
+    // }
 }
 export default App;
