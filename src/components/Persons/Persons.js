@@ -31,6 +31,12 @@ class Persons extends Component {
         console.log('Persons.js componentDidUpdate');
         console.log(snapshot);
     }
+
+    //su equivalente en functional components, se hace en el useEffect, haciendo un return a una funcion anonima
+    componentWillUnmount() {
+        console.log('Persons.js componentWillUnmount');
+    }
+
     //3
     render() {
         console.log('Persons.js rendering...');
