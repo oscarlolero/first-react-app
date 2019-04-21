@@ -15,7 +15,13 @@ class Persons extends Component {
     //Dont: Cause side-effects
     shouldComponentUpdate(nextProps, nextState) {
         console.log('Persons.js shouldComponentUpdate');
-        return true;
+        //los dos apuntan a punteros, es muy importante entender este video:
+        //https://www.udemy.com/react-the-complete-guide-incl-redux/learn/lecture/13556300#questions/6411320
+        if(nextProps.persons !== this.props.persons) {
+            return true;
+        } else {
+            return false;
+        }
     }
     //5
     //Do: Last-minute dom ops

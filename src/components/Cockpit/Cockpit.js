@@ -1,17 +1,45 @@
-import React from 'react';
+import React, {useEffect} from 'react'; //react hook
 import classes from "./Cockpit.module.css";
 //Como no se usa el state, se crea una funcion y no una class extends
+//Como es un functional component, no se pueden usar los metodos de componentShouldUpdate etc, se usa useState
 const Cockpit = (props) => {
+    //useState()
+    //Runs on every update/every render cycle
+    //Combinacion de componentDidMount and componentDidUpdate
+/*    useEffect( () => {
+        console.log('Cockpit.js useEffect');
+        //Http request...
+        console.log('CACA');
+    }, [props.persons]); //solo se ejecuta el codigo de arriba si props.persons cambia
+    //Se pueden agregar varios useEffect*/
+
+    useEffect( () => {
+        console.log('Cockpit.js useEffect');
+        //Http request...
+        console.log('CACA');
+        return () => { //el equivalente de componentWillUnmount()
+            console.log('Cockpit cleanup work in useEffect');
+        }
+    }, []); //no depende de nada, solo correra una vez, se ejecutara el return solo si el componente de desmonta
+    //Se pueden agregar varios useEffect
+
+    useEffect(() => {
+        console.log('Cockpit.js 2nd useEffect');
+        return () => { //el equivalente de componentWillUnmount()
+            console.log('Cockpit cleanup work in 2nd useEffect');
+        }
+    });
+
     const assignedClasses = [];
     let btnClass = '';
 
     if(props.showPersons) {
         btnClass = classes.Red;
     }
-    if(props.persons.length <= 2) {
+    if(props.personsLength <= 2) {
         assignedClasses.push(classes.red);
     }
-    if(props.persons.length <= 1) {
+    if(props.personsLength <= 1) {
         assignedClasses.push(classes.bold);
     }
     return (
@@ -24,4 +52,4 @@ const Cockpit = (props) => {
     );
 };
 
-export default Cockpit;
+export default React.memo(Cockpit);
