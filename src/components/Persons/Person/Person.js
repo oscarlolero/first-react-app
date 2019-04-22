@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+//import React, {Component, Fragment} from 'react';
 import classes from './Person.module.css';
-
+import Aux from '../../../hoc/Auxiliar';
 class Person extends Component {
     render() {
         console.log('Person.js rendering...');
@@ -11,6 +12,28 @@ class Person extends Component {
                 <input type="text" onChange={this.props.changed} value={this.props.name}/>
             </div>
         )
+        //Por si no queremos envolver en un div
+        // return (
+        //     <Fragment>
+        //         <h1 onClick={this.props.click}>Alo {this.props.name}, años: {this.props.age}</h1>
+        //         <h2>{this.props.children}</h2>
+        //         <input type="text" onChange={this.props.changed} value={this.props.name}/>
+        //     </Fragment>
+        // );
+        //Por si no queremos envolver en un div
+        // return (
+        //     <Aux>
+        //         <h1 onClick={this.props.click}>Alo {this.props.name}, años: {this.props.age}</h1>
+        //         <h2>{this.props.children}</h2>
+        //         <input type="text" onChange={this.props.changed} value={this.props.name}/>
+        //     </Aux>
+        // );
+        //Por si no queremos envolver en un div
+        // return [
+        //         <h1 key="asd1" onClick={this.props.click}>Alo {this.props.name}, años: {this.props.age}</h1>,
+        //         <h2 key="asd2" >{this.props.children}</h2>,
+        //         <input key="asd2" type="text" onChange={this.props.changed} value={this.props.name}/>
+        // ]
     }
 }
 export default Person;
