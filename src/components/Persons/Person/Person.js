@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 //import React, {Component, Fragment} from 'react';
 import classes from './Person.module.css';
 import Aux from '../../../hoc/Auxiliar';
+import withClass from '../../../hoc/withClass';
 class Person extends Component {
     render() {
         console.log('Person.js rendering...');
         return (
-            <div className={classes.Person}>
+            <Aux>
                 <h1 onClick={this.props.click}>Alo {this.props.name}, años: {this.props.age}</h1>
                 <h2>{this.props.children}</h2>
                 <input type="text" onChange={this.props.changed} value={this.props.name}/>
-            </div>
+            </Aux>
         )
         //Por si no queremos envolver en un div
         // return (
@@ -36,7 +37,7 @@ class Person extends Component {
         // ]
     }
 }
-export default Person;
+export default withClass(Person, classes.Person);
 //probando RADIUM
 /*
 import React from 'react';
