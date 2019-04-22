@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent { //Pure component hace el checkeo de todos los props para analizar si va a hacer un update o no
     //Como no hay state, no se recomienda usar esta funcion 1
     //Do: Sync state to props
     //Dont: Cause side-effects
@@ -13,7 +13,7 @@ class Persons extends Component {
     //May cancel updating process! 2
     //Do: Decide whether to continue or not
     //Dont: Cause side-effects
-    shouldComponentUpdate(nextProps, nextState) {
+/*    shouldComponentUpdate(nextProps, nextState) {
         console.log('Persons.js shouldComponentUpdate');
         //los dos apuntan a punteros, es muy importante entender este video:
         //https://www.udemy.com/react-the-complete-guide-incl-redux/learn/lecture/13556300#questions/6411320
@@ -22,7 +22,7 @@ class Persons extends Component {
         } else {
             return false;
         }
-    }
+    }*/
     //5
     //Do: Last-minute dom ops
     //Don't: Cause side-effects
