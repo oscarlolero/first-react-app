@@ -23,7 +23,8 @@ class App extends Component {
                 {id: 'asdsa3', name: 'Ricky', age: 23}
             ],
             showPersons: false,
-            showCockpit: true
+            showCockpit: true,
+            changeCounter: 0
         };
     };
 
@@ -78,7 +79,14 @@ class App extends Component {
         person.name = event.target.value;
         const persons = [...this.state.persons];
         persons[personIndex] = person;
-        this.setState({ persons: persons }); //es mucho código, pero es la forma más eficiente
+        //Manage state correctly when there are counters or any other vars that depends of prev state
+        //https://www.udemy.com/react-the-complete-guide-incl-redux/learn/lecture/13556334#questions
+        this.setState((prevState, props) => {
+            return {
+                persons: persons,
+                changeCounter: prevState.changeCounter + 1
+            }
+        });
     };
 
     deletePersonHandler = (personIndex) => {
@@ -87,7 +95,11 @@ class App extends Component {
         //OPCION 2
         const persons = [...this.state.persons];
         persons.splice(personIndex, 1);
-        this.setState({persons: persons});
+        this.setState({
+            persons: persons
+        });
+
+
     };
 //es mejor usar bind :v mas rapido
 
