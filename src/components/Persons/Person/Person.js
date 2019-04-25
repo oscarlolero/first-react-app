@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types'; //for functional and class based components
+
 //import React, {Component, Fragment} from 'react';
 import classes from './Person.module.css';
 import Aux from '../../../hoc/Auxiliar';
@@ -37,6 +39,13 @@ class Person extends Component {
         // ]
     }
 }
+
+Person.propTypes = {
+    click: PropTypes.func, //pointer to function
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+};
 export default withClass(Person, classes.Person);
 //probando RADIUM
 /*
