@@ -6,13 +6,29 @@ import classes from './Person.module.css';
 import Aux from '../../../hoc/Auxiliar';
 import withClass from '../../../hoc/withClass';
 class Person extends Component {
+
+    constructor(props) {
+        super(props);
+        this.inputElementRef = React.createRef();
+    }
+    componentDidMount() {
+        // this.inputElement.focus();//con esto se hace focus al ultimo elemento añadido en la lista de persons
+        this.inputElementRef.current.focus();
+    }
+
     render() {
         console.log('Person.js rendering...');
         return (
             <Aux>
                 <h1 onClick={this.props.click}>Alo {this.props.name}, años: {this.props.age}</h1>
                 <h2>{this.props.children}</h2>
-                <input type="text" onChange={this.props.changed} value={this.props.name}/>
+                <input
+                    // ref={(inputEl) => {this.inputElement = inputEl}}
+                    ref={this.inputElementRef}
+                    type="text"
+                    onChange={this.props.changed}
+                    value={this.props.name}
+                />
             </Aux>
         )
         //Por si no queremos envolver en un div

@@ -1,9 +1,14 @@
-import React, {useEffect} from 'react'; //react hook
+import React, {useEffect, useRef} from 'react'; //react hook
 import classes from "./Cockpit.module.css";
 //Como no se usa el state, se crea una funcion y no una class extends
 //Como es un functional component, no se pueden usar los metodos de componentShouldUpdate etc, se usa useState
 const Cockpit = (props) => {
+    //Cuando se cargue la pag que automaticamente se presione el boton
+    const toggleBtnRef = useRef(null);
+
+
     //useState()
+    //useEffect
     //Runs on every update/every render cycle
     //Combinacion de componentDidMount and componentDidUpdate
 /*    useEffect( () => {
@@ -16,8 +21,9 @@ const Cockpit = (props) => {
     useEffect( () => {
         console.log('Cockpit.js useEffect');
         //Http request...
-        console.log('CACA');
-        return () => { //el equivalente de componentWillUnmount()
+        toggleBtnRef.current.click();
+        return () => { //el equivalente de componentWillUnmount(), return es opcional
+            //RETURN se ejecutra antes del useEffect pero después del render cycle
             console.log('Cockpit cleanup work in useEffect');
         }
     }, []); //no depende de nada, solo correra una vez, se ejecutara el return solo si el componente de desmonta
@@ -46,8 +52,11 @@ const Cockpit = (props) => {
         <div className={classes.Cockpit}>
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>This is really working!</p>
-            <button className={btnClass}
-                    onClick={props.clicked}>Show persons</button>
+            <button
+                ref={toggleBtnRef}
+                className={btnClass}
+                onClick={props.clicked}>Show persons
+            </button>
         </div>
     );
 };
